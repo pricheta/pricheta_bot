@@ -73,12 +73,15 @@ async def process_amount(
     await state.clear()
 
     transfer = MoneyTransfer.model_validate(data)
+    old_debt = await debt_accounter.get_debt(transfer.sender, transfer.recipient)
     await debt_accounter.insert_transfer(transfer)
     debt = await debt_accounter.get_debt(transfer.sender, transfer.recipient)
 
     msg = (
         f'Перевод зафиксирован\n'
         f'{transfer}\n\n'
+        f'Изначальный долг:\n'
+        f'{old_debt}\n\n'
         f'Актуальный долг:\n'
         f'{debt}\n\n'
         f'Зафиксировал перевод: @{message.from_user.username}'  # type: ignore
