@@ -9,7 +9,7 @@ from aiogram.enums import ParseMode
 from aiogram.filters import CommandStart
 
 from apps.telegram_bot.config import BotConfig
-from apps.telegram_bot.handlers.command_start import (
+from apps.telegram_bot.handlers.start import (
     command_start_handler,
     DEBT_ACCOUNTER_BUTTON_TEXT,
 )
@@ -22,7 +22,7 @@ config = BotConfig()  # type: ignore
 dp = Dispatcher()
 dp.message(CommandStart())(command_start_handler)
 
-dp.callback_query(F.data == DEBT_ACCOUNTER_BUTTON_TEXT)(open_debt_menu)
+dp.message(F.text == DEBT_ACCOUNTER_BUTTON_TEXT)(open_debt_menu)
 
 
 async def main() -> None:

@@ -1,6 +1,5 @@
-from aiogram.types import CallbackQuery
+from aiogram.types import Message
 
 
-async def open_debt_menu(callback: CallbackQuery) -> None:
-    await callback.message.answer('Открываю учёт долгов...')  # type: ignore
-    await callback.answer()
+async def open_debt_menu(message: Message) -> None:
+    await message.answer('Приложение "Долги"')
