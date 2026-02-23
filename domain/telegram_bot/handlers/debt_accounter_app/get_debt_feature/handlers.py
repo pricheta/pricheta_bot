@@ -7,9 +7,18 @@ from domain.telegram_bot.handlers.debt_accounter_app.get_debt_feature.forms impo
     DebtForm,
 )
 
-GET_DEBT_TEXT = '📋 Узнать долг'
+GET_DEBT_VLADA_AND_ROMA_TEXT = '📋 Узнать долг между Владой и Ромой'
+GET_DEBT_TEXT = '📋 Узнать долг между двумя людьми'
 
 get_debt_router = Router()
+
+
+@get_debt_router.message(F.text == GET_DEBT_VLADA_AND_ROMA_TEXT)
+async def get_debt_roma_and_vlada(
+    message: Message, debt_accounter: DebtAccounterPort
+) -> None:
+    debt = await debt_accounter.get_debt('Рома', 'Влада')
+    await message.answer(str(debt))
 
 
 @get_debt_router.message(F.text == GET_DEBT_TEXT)

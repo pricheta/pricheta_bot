@@ -9,6 +9,11 @@ from domain.ports.debt_accounter import DebtAccounterPort
 
 
 @lru_cache(maxsize=1)
+def get_debt_accounter_session() -> ClientSession:
+    return ClientSession()
+
+
+@lru_cache(maxsize=1)
 def get_debt_accounter() -> DebtAccounterPort:
-    debt_accounter_session = ClientSession()
+    debt_accounter_session = get_debt_accounter_session()
     return DebtAccounterAsyncClient(debt_accounter_session)
