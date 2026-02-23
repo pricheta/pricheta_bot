@@ -9,7 +9,7 @@ from domain.ports.debt_accounter import DebtAccounterPort
 
 class DebtAccounterAsyncClient(DebtAccounterPort):
     def __init__(self, session: ClientSession) -> None:
-        self.config = DebtAccounterClientConfig()  # type: ignore
+        self.config = DebtAccounterClientConfig()  #
         self._session = session
 
     async def get_debt(self, first_person: str, second_person: str) -> Debt:
@@ -33,7 +33,7 @@ class DebtAccounterAsyncClient(DebtAccounterPort):
             'lookback_days': lookback_days,
         }
 
-        async with self._session.get(url, params=params) as response:  # type: ignore
+        async with self._session.get(url, params=params) as response:
             response.raise_for_status()
             data = await response.json()
 

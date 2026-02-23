@@ -1,4 +1,7 @@
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove
+
+REMOVE_KEYBOARD = ReplyKeyboardRemove()
+
 
 BY_DEFAULT = 'По умолчанию'
 BY_DEFAULT_KEYBOARD = ReplyKeyboardMarkup(
