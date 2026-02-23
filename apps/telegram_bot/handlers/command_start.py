@@ -2,7 +2,6 @@ from aiogram.types import (
     Message,
     InlineKeyboardMarkup,
     InlineKeyboardButton,
-    CallbackQuery,
 )
 
 
@@ -25,8 +24,3 @@ start_keyboard = InlineKeyboardMarkup(
 
 async def command_start_handler(message: Message) -> None:
     await message.answer(START_MESSAGE, reply_markup=start_keyboard)
-
-
-async def open_debt_menu(callback: CallbackQuery) -> None:
-    await callback.message.answer('Открываю учёт долгов...')  # type: ignore
-    await callback.answer()

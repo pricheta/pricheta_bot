@@ -12,8 +12,8 @@ from apps.telegram_bot.config import BotConfig
 from apps.telegram_bot.handlers.command_start import (
     command_start_handler,
     DEBT_ACCOUNTER_BUTTON_TEXT,
-    open_debt_menu,
 )
+from apps.telegram_bot.handlers.debt_accounter.open_debt_menu import open_debt_menu
 
 load_dotenv()
 config = BotConfig()  # type: ignore
