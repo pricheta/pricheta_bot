@@ -1,6 +1,7 @@
 from aiogram import Router, F
-from aiogram.types import Message, ReplyKeyboardRemove
+from aiogram.types import Message
 
+from domain.config import config
 from domain.models import MoneyTransfer
 from domain.ports.asker import AskerPort
 from domain.ports.debt_accounter import DebtAccounterPort
@@ -105,9 +106,12 @@ async def get_transfer_history(
     if not second_person:
         return
 
-    ask_text = 'Введите глубину истории в днях (по умолчанию 7):'
+    ask_text = f'Введите глубину истории в днях (по умолчанию {config.GET_TRANSFER_HISTORY_DEFAULT_LOOKBACK}):'
     lookback_days = await asker.ask(
-        ask_text, message, [int, lambda x: int(x) > 0], default='7'
+        ask_text,
+        message,
+        [int, lambda x: int(x) > 0],
+        default=str(config.GET_TRANSFER_HISTORY_DEFAULT_LOOKBACK),
     )
     if not lookback_days:
         return

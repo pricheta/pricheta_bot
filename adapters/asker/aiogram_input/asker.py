@@ -4,6 +4,7 @@ from aiogram import Dispatcher
 from aiogram.types import Message, ReplyKeyboardMarkup, ReplyKeyboardRemove
 from aiogram_input import InputManager
 
+from domain.config import config
 from domain.ports.asker import AskerPort, validator
 from domain.telegram_bot.handlers.keyboards import (
     BY_DEFAULT_KEYBOARD,
@@ -29,7 +30,9 @@ class AiogramInputAsker(AskerPort):
 
         while True:
             await message.answer(ask_text, reply_markup=reply_markup)
-            value = await self.asker.input(message.chat.id, timeout=30)
+            value = await self.asker.input(
+                message.chat.id, timeout=config.USER_ANSWER_TIMEOUT
+            )
 
             if not value:
                 return None

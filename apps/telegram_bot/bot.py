@@ -2,7 +2,6 @@ import asyncio
 import logging
 import sys
 
-from dotenv import load_dotenv
 
 from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
@@ -16,8 +15,6 @@ from apps.telegram_bot.deps import (
 )
 from domain.telegram_bot.handlers.command_start import command_start_router
 from domain.telegram_bot.handlers.debt_accounter import debt_accounter_router
-
-load_dotenv()
 
 
 async def main() -> None:
