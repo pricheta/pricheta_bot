@@ -2,6 +2,7 @@ from aiogram import Router, F
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message
 
+from domain.ports.debt_accounter import DebtAccounterPort
 from domain.telegram_bot.handlers.debt_accounter_app.get_debt_feature.forms import (
     DebtForm,
 )
@@ -27,12 +28,13 @@ async def process_first_name(message: Message, state: FSMContext) -> None:
 
 
 @get_debt_router.message(DebtForm.second_name)
-async def process_second_name(message: Message, state: FSMContext) -> None:
+async def process_second_name(message: Message, state: FSMContext, debt_accounter: DebtAccounterPort) -> None:
     await state.update_data(second_name=message.text)
     data = await state.get_data()
     await state.clear()
 
-    first = data['first_name']
-    second = data['second_name']
+    first_person = data['first_name']
+    second_person = data['second_name']
 
-    await message.answer(f'Ищу долг между пользователями {first} и {second}...')
+    debt = await debt_accounter.get_debt(first_person, second_person)
+    await message.answer(str(debt))
