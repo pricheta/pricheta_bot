@@ -7,6 +7,10 @@ from domain.telegram_bot.handlers.debt_accounter_app.get_debt_feature.handlers i
     get_debt_router,
     GET_DEBT_VLADA_AND_ROMA_TEXT,
 )
+from domain.telegram_bot.handlers.debt_accounter_app.transfer_feature.handlers import (
+    transfer_router,
+    TRANSFER_TEXT,
+)
 
 DEBT_ACCOUNTER_BUTTON_TEXT = '📋 Долги'
 
@@ -16,13 +20,16 @@ start_keyboard = ReplyKeyboardMarkup(
             KeyboardButton(text=GET_DEBT_VLADA_AND_ROMA_TEXT),
             KeyboardButton(text=GET_DEBT_TEXT),
         ],
+        [
+            KeyboardButton(text=TRANSFER_TEXT),
+        ],
     ],
     resize_keyboard=True,
 )
 
 
 debt_accounter_router = Router()
-debt_accounter_router.include_router(get_debt_router)
+debt_accounter_router.include_routers(get_debt_router, transfer_router)
 
 
 @debt_accounter_router.message(Command('debt'))
