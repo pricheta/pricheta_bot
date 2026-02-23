@@ -1,5 +1,5 @@
 @echo off
-set CODE=domain
+set CODE=domain adapters
 
 cls
 ruff format %CODE%
