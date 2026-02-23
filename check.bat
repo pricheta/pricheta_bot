@@ -1,5 +1,5 @@
 @echo off
-set CODE=adapters apps domain tests
+set CODE=adapters apps
 
 cls
 ruff format %CODE%
