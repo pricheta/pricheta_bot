@@ -1,7 +1,6 @@
 import asyncio
 import logging
 import sys
-from os import getenv
 from dotenv import load_dotenv
 
 from aiogram import Bot, Dispatcher
@@ -9,11 +8,12 @@ from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from aiogram.filters import CommandStart
 
+from apps.telegram_bot.config import BotConfig
 from apps.telegram_bot.handlers.command_start import command_start_handler
 
 
 load_dotenv()
-BOT_TOKEN = getenv("BOT_TOKEN")
+config = BotConfig()  # type: ignore
 
 
 dp = Dispatcher()
@@ -21,10 +21,9 @@ dp.message(CommandStart())(command_start_handler)
 
 
 async def main() -> None:
-    if not BOT_TOKEN:
-        raise ValueError("BOT_TOKEN is not presented")
-
-    bot = Bot(token=BOT_TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
+    bot = Bot(
+        token=config.TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML)
+    )
     await dp.start_polling(bot)
 
 
