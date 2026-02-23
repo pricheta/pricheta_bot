@@ -5,3 +5,6 @@ class BotConfig(BaseSettings):
     model_config = SettingsConfigDict(env_prefix='BOT_')
 
     TOKEN: str
+
+
+config = BotConfig()

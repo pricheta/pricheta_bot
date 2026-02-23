@@ -8,7 +8,7 @@ from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 
-from apps.telegram_bot.config import BotConfig
+from domain.config import config
 from apps.telegram_bot.deps import (
     get_debt_accounter,
     get_debt_accounter_session,
@@ -29,7 +29,6 @@ async def main() -> None:
 
     debt_accounter_session = get_debt_accounter_session()
 
-    config = BotConfig()
     bot = Bot(
         token=config.TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML)
     )
