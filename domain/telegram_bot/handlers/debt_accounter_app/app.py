@@ -5,6 +5,9 @@ from aiogram.types import Message
 from domain.telegram_bot.handlers.debt_accounter_app.get_debt.handlers import (
     get_debt_router,
 )
+from domain.telegram_bot.handlers.debt_accounter_app.get_transfer_history.handlers import (
+    get_transfer_history_router,
+)
 from domain.telegram_bot.handlers.debt_accounter_app.transfer.handlers import (
     transfer_router,
 )
@@ -14,7 +17,9 @@ from domain.telegram_bot.handlers.keyboards import (
 )
 
 debt_accounter_router = Router()
-debt_accounter_router.include_routers(get_debt_router, transfer_router)
+debt_accounter_router.include_routers(
+    get_debt_router, transfer_router, get_transfer_history_router
+)
 
 
 @debt_accounter_router.message(Command('debt'))

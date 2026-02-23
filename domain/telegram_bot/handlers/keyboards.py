@@ -1,5 +1,13 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
+BY_DEFAULT = 'По умолчанию'
+BY_DEFAULT_KEYBOARD = ReplyKeyboardMarkup(
+    keyboard=[
+        [KeyboardButton(text=BY_DEFAULT)],
+    ],
+    resize_keyboard=True,
+)
+
 ROMA_NAME = 'Рома'
 VLADA_NAME = 'Влада'
 ROMA_AND_VLADA_KEYBOARD = ReplyKeyboardMarkup(
