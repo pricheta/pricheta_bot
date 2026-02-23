@@ -1,4 +1,5 @@
 from aiogram import Router, F
+from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message
 
@@ -13,6 +14,7 @@ TRANSFER_TEXT = '📋 Зафиксировать перевод'
 transfer_router = Router()
 
 
+@transfer_router.message(Command('transfer'))
 @transfer_router.message(F.text == TRANSFER_TEXT)
 async def transfer(message: Message, state: FSMContext) -> None:
     msg = 'Введите отправителя'
@@ -67,4 +69,4 @@ async def process_amount(
     )
     await debt_accounter.insert_transfer(transfer)
 
-    await message.answer(f'Перевод {transfer} зафиксирован')
+    await message.answer(f'Перевод зафиксирован\n{transfer}')

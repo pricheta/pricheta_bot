@@ -28,4 +28,7 @@ class DebtAccounterAsyncClient(DebtAccounterPort):
         raise NotImplementedError()
 
     async def insert_transfer(self, transfer: MoneyTransfer) -> None:
-        raise NotImplementedError()
+        url = f"{self.config.HOST}/transfer/"
+
+        async with self._session.post(url, json=transfer.model_dump()) as response:
+            response.raise_for_status()
