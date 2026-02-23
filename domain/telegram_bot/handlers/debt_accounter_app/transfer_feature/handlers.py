@@ -70,5 +70,5 @@ async def process_amount(
         f'{debt}\n\n'
         f'Зафиксировал перевод: @{message.from_user.username}'  # type: ignore
     )
-    await message.bot.send_message(-4732298768, msg)  # type: ignore
+    # await message.bot.send_message(-4732298768, msg)  # type: ignore
     await message.answer(msg)
