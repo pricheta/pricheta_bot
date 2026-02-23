@@ -3,7 +3,7 @@ from typing import Protocol
 from domain.models import MoneyTransfer, Debt
 
 
-class MoneyInfoProviderPort(Protocol):
+class DebtAccounterPort(Protocol):
     def insert_transfer(self, transfer: MoneyTransfer) -> None: ...
 
     def get_transfer_history(

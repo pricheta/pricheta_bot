@@ -17,7 +17,7 @@ config = BotConfig()  # type: ignore
 
 dp = Dispatcher()
 dp.include_routers(command_start_router, debt_accounter_router)
-# dp["money_info_provider"] = MoneyInfoProviderPort()
+# dp["debt_accounter"] =
 
 
 async def main() -> None:
