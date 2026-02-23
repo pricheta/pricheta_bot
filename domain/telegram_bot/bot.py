@@ -3,26 +3,21 @@ import logging
 import sys
 from dotenv import load_dotenv
 
-from aiogram import Bot, Dispatcher, F
+from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
-from aiogram.filters import CommandStart
 
 from domain.telegram_bot.config import BotConfig
-from domain.telegram_bot.handlers.start import (
-    command_start_handler,
-    DEBT_ACCOUNTER_BUTTON_TEXT,
-)
-from domain.telegram_bot.handlers.debt_accounter import open_debt_menu
+from domain.telegram_bot.handlers.command_start import command_start_router
+from domain.telegram_bot.handlers.debt_accounter_app.app import debt_accounter_router
 
 load_dotenv()
 config = BotConfig()  # type: ignore
 
 
 dp = Dispatcher()
-dp.message(CommandStart())(command_start_handler)
-
-dp.message(F.text == DEBT_ACCOUNTER_BUTTON_TEXT)(open_debt_menu)
+dp.include_routers(command_start_router, debt_accounter_router)
+# dp["money_info_provider"] = MoneyInfoProviderPort()
 
 
 async def main() -> None:
