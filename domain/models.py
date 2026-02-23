@@ -15,8 +15,11 @@ class Debt(BaseModel):
     creditor: str
     amount: int
 
-    def __repr__(self) -> str:
+    def __str__(self) -> str:
         if not self.amount:
-            return f'Между {self.debtor} и {self.creditor} нет задолженностей!'
+            return f'{self.debtor} | {self.creditor} | {self.amount} ₽'
 
-        return f'{self.debtor} → {self.creditor}: {self.amount} ₽'
+        return f'Заемщик {self.debtor} | Должник {self.creditor} | {self.amount} ₽'
+
+    def __repr__(self) -> str:
+        return self.__str__()
