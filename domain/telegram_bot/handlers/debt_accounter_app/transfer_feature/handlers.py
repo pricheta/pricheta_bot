@@ -64,10 +64,12 @@ async def process_amount(
     await debt_accounter.insert_transfer(transfer)
     debt = await debt_accounter.get_debt(transfer.sender, transfer.recipient)
 
-    await message.answer(
+    msg = (
         f'Перевод зафиксирован\n'
         f'{transfer}\n\n'
         f'Актуальный долг:\n'
         f'{debt}\n\n'
         f'Зафиксировал перевод: @{message.from_user.username}'  # type: ignore
     )
+    await message.bot.send_message(-4732298768, msg)  # type: ignore
+    await message.answer(msg)
