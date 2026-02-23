@@ -8,12 +8,12 @@ from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from aiogram.filters import CommandStart
 
-from apps.telegram_bot.config import BotConfig
-from apps.telegram_bot.handlers.start import (
+from domain.telegram_bot.config import BotConfig
+from domain.telegram_bot.handlers.start import (
     command_start_handler,
     DEBT_ACCOUNTER_BUTTON_TEXT,
 )
-from apps.telegram_bot.handlers.debt_accounter import open_debt_menu
+from domain.telegram_bot.handlers.debt_accounter import open_debt_menu
 
 load_dotenv()
 config = BotConfig()  # type: ignore

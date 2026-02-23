@@ -1,5 +1,5 @@
 @echo off
-set CODE=apps
+set CODE=domain
 
 cls
 ruff format %CODE%
