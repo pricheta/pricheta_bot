@@ -15,7 +15,7 @@ from domain.telegram_bot.deps import (
     get_asker,
 )
 from domain.telegram_bot.handlers.command_start import command_start_router
-from domain.telegram_bot.handlers.debt_accounter.app import debt_accounter_router
+from domain.telegram_bot.handlers.debt_accounter import debt_accounter_router
 
 load_dotenv()
 
