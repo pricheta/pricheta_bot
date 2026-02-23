@@ -1,5 +1,5 @@
 @echo off
-set CODE=adapters apps
+set CODE=apps
 
 cls
 ruff format %CODE%

@@ -11,6 +11,7 @@ from aiogram.filters import CommandStart
 
 from apps.telegram_bot.handlers.command_start import command_start_handler
 
+
 load_dotenv()
 BOT_TOKEN = getenv("BOT_TOKEN")
 
@@ -19,9 +20,10 @@ dp = Dispatcher()
 dp.message(CommandStart())(command_start_handler)
 
 
-
-
 async def main() -> None:
+    if not BOT_TOKEN:
+        raise ValueError("BOT_TOKEN is not presented")
+
     bot = Bot(token=BOT_TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
     await dp.start_polling(bot)
 
