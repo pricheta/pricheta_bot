@@ -12,8 +12,10 @@ DEBT_ACCOUNTER_BUTTON_TEXT = '📋 Долги'
 
 start_keyboard = ReplyKeyboardMarkup(
     keyboard=[
-        [KeyboardButton(text=GET_DEBT_TEXT)],
-        [KeyboardButton(text=GET_DEBT_VLADA_AND_ROMA_TEXT)],
+        [
+            KeyboardButton(text=GET_DEBT_VLADA_AND_ROMA_TEXT),
+            KeyboardButton(text=GET_DEBT_TEXT),
+        ],
     ],
     resize_keyboard=True,
 )

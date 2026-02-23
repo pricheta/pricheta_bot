@@ -7,7 +7,7 @@ from domain.telegram_bot.handlers.debt_accounter_app.get_debt_feature.forms impo
     DebtForm,
 )
 
-GET_DEBT_VLADA_AND_ROMA_TEXT = '📋 Узнать долг между Владой и Ромой'
+GET_DEBT_VLADA_AND_ROMA_TEXT = '📋 Узнать долг между Ромой и Владой'
 GET_DEBT_TEXT = '📋 Узнать долг между двумя людьми'
 
 get_debt_router = Router()
