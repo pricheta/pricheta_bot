@@ -16,7 +16,6 @@ from domain.telegram_bot.handlers.keyboards import (
 transfer_router = Router()
 
 
-@transfer_router.message(Command('transfer'))
 @transfer_router.message(F.text == TRANSFER_TEXT)
 async def transfer(message: Message, state: FSMContext) -> None:
     msg = 'Введите отправителя:'
