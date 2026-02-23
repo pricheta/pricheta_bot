@@ -56,17 +56,18 @@ async def process_amount(
         await message.answer('Введите корректную сумму (целое положительное число):')
         return
 
+    await state.update_data(amount=message.text)
     data = await state.get_data()
     await state.clear()
 
-    sender = data['sender']
-    recipient = data['recipient']
-
-    transfer = MoneyTransfer(
-        sender=sender,
-        recipient=recipient,
-        amount=amount,
-    )
+    transfer = MoneyTransfer.model_validate(data)
     await debt_accounter.insert_transfer(transfer)
+    debt = await debt_accounter.get_debt(transfer.sender, transfer.recipient)
 
-    await message.answer(f'Перевод зафиксирован\n{transfer}')
+    await message.answer(
+        f'Перевод зафиксирован\n'
+        f'{transfer}\n\n'
+        f'Актуальный долг:\n'
+        f'{debt}\n\n'
+        f'Зафиксировал перевод: @{message.from_user.username}'  # type: ignore
+    )
