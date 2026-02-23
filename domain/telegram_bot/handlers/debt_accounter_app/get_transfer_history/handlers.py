@@ -1,6 +1,6 @@
 from aiogram import Router, F
 from aiogram.fsm.context import FSMContext
-from aiogram.types import Message
+from aiogram.types import Message, ReplyKeyboardRemove
 
 from domain.models import MoneyTransfer
 from domain.ports.debt_accounter import DebtAccounterPort
@@ -83,4 +83,4 @@ async def process_lookback_days(
     )
 
     msg = MoneyTransfer.history_str(history)
-    await message.answer(msg)
+    await message.answer(msg, reply_markup=ReplyKeyboardRemove())

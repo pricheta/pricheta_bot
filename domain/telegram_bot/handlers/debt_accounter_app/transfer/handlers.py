@@ -1,6 +1,6 @@
 from aiogram import Router, F
 from aiogram.fsm.context import FSMContext
-from aiogram.types import Message
+from aiogram.types import Message, ReplyKeyboardRemove
 
 from domain.models import MoneyTransfer
 from domain.ports.debt_accounter import DebtAccounterPort
@@ -85,4 +85,4 @@ async def process_amount(
         f'Зафиксировал перевод: @{message.from_user.username}'  # type: ignore
     )
     # await message.bot.send_message(-4732298768, msg)  # type: ignore
-    await message.answer(msg)
+    await message.answer(msg, reply_markup=ReplyKeyboardRemove())

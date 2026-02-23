@@ -1,6 +1,6 @@
 from aiogram import Router, F
 from aiogram.fsm.context import FSMContext
-from aiogram.types import Message
+from aiogram.types import Message, ReplyKeyboardRemove
 
 from domain.ports.debt_accounter import DebtAccounterPort
 from domain.telegram_bot.handlers.debt_accounter_app.get_debt.forms import (
@@ -45,4 +45,4 @@ async def process_second_name(
     await state.clear()
 
     debt = await debt_accounter.get_debt(first_person, second_person)  # type: ignore
-    await message.answer(str(debt))
+    await message.answer(str(debt), reply_markup=ReplyKeyboardRemove())
