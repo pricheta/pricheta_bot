@@ -8,7 +8,10 @@ from domain.ports.debt_accounter import DebtAccounterPort
 from domain.telegram_bot.handlers.debt_accounter_app.transfer_feature.forms import (
     TransferForm,
 )
-from domain.telegram_bot.handlers.keyboards import TRANSFER_TEXT
+from domain.telegram_bot.handlers.keyboards import (
+    TRANSFER_TEXT,
+    ROMA_AND_VLADA_KEYBOARD,
+)
 
 transfer_router = Router()
 
@@ -16,8 +19,8 @@ transfer_router = Router()
 @transfer_router.message(Command('transfer'))
 @transfer_router.message(F.text == TRANSFER_TEXT)
 async def transfer(message: Message, state: FSMContext) -> None:
-    msg = 'Введите отправителя'
-    await message.answer(msg)
+    msg = 'Введите отправителя:'
+    await message.answer(msg, reply_markup=ROMA_AND_VLADA_KEYBOARD)
     await state.set_state(TransferForm.sender)
 
 
@@ -26,14 +29,24 @@ async def process_sender(message: Message, state: FSMContext) -> None:
     await state.update_data(sender=message.text)
 
     msg = 'Введите получателя:'
-    await message.answer(msg)
+    await message.answer(msg, reply_markup=ROMA_AND_VLADA_KEYBOARD)
     await state.set_state(TransferForm.recipient)
 
 
 @transfer_router.message(TransferForm.recipient)
 async def process_recipient(
-    message: Message, state: FSMContext, debt_accounter: DebtAccounterPort
+    message: Message,
+    state: FSMContext,
 ) -> None:
+    data = await state.get_data()
+    sender = data['sender']
+    recipient = message.text
+
+    if sender == recipient:
+        msg = 'Отправитель и получатель не должны совпадать, повторите попытку:'
+        await message.answer(msg, reply_markup=ROMA_AND_VLADA_KEYBOARD)
+        return
+
     await state.update_data(recipient=message.text)
 
     msg = 'Введите сумму перевода:'
