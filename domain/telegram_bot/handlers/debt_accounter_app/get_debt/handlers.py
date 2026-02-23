@@ -3,7 +3,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import Message
 
 from domain.ports.debt_accounter import DebtAccounterPort
-from domain.telegram_bot.handlers.debt_accounter_app.get_debt_feature.forms import (
+from domain.telegram_bot.handlers.debt_accounter_app.get_debt.forms import (
     DebtForm,
 )
 from domain.telegram_bot.handlers.keyboards import (

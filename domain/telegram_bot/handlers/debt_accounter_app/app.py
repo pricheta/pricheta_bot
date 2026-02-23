@@ -2,10 +2,10 @@ from aiogram import Router, F
 from aiogram.filters import Command
 from aiogram.types import Message
 
-from domain.telegram_bot.handlers.debt_accounter_app.get_debt_feature.handlers import (
+from domain.telegram_bot.handlers.debt_accounter_app.get_debt.handlers import (
     get_debt_router,
 )
-from domain.telegram_bot.handlers.debt_accounter_app.transfer_feature.handlers import (
+from domain.telegram_bot.handlers.debt_accounter_app.transfer.handlers import (
     transfer_router,
 )
 from domain.telegram_bot.handlers.keyboards import (

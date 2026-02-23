@@ -5,7 +5,7 @@ from aiogram.types import Message
 
 from domain.models import MoneyTransfer
 from domain.ports.debt_accounter import DebtAccounterPort
-from domain.telegram_bot.handlers.debt_accounter_app.transfer_feature.forms import (
+from domain.telegram_bot.handlers.debt_accounter_app.transfer.forms import (
     TransferForm,
 )
 from domain.telegram_bot.handlers.keyboards import (
