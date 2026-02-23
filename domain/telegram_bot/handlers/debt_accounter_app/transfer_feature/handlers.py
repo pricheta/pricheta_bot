@@ -8,8 +8,7 @@ from domain.ports.debt_accounter import DebtAccounterPort
 from domain.telegram_bot.handlers.debt_accounter_app.transfer_feature.forms import (
     TransferForm,
 )
-
-TRANSFER_TEXT = '📋 Зафиксировать перевод'
+from domain.telegram_bot.handlers.keyboards import TRANSFER_TEXT
 
 transfer_router = Router()
 
