@@ -14,3 +14,15 @@ dependencies = [
     "pytest-coverage>=0.0",
     "ruff>=0.15.2",
 ]
+
+[tool.ruff.format]
+quote-style = "single"
+
+[tool.ruff.lint]
+select = [
+    "ANN201",  # Публичные функции
+    "ANN202",  # Приватные функции
+    "ANN204",  # Специальные методы (__init__ и др.)
+    "ANN205",  # Статические методы
+    "ANN206",  # Методы класса
+]
