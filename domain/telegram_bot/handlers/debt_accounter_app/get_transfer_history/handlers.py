@@ -2,6 +2,7 @@ from aiogram import Router, F
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message
 
+from domain.models import MoneyTransfer
 from domain.ports.debt_accounter import DebtAccounterPort
 from domain.telegram_bot.handlers.debt_accounter_app.get_transfer_history.forms import (
     TransferHistory,
@@ -81,4 +82,5 @@ async def process_lookback_days(
         first_name, second_name, lookback_days
     )
 
-    await message.answer(str(history))
+    msg = MoneyTransfer.history_str(history)
+    await message.answer(msg)
