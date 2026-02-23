@@ -1,0 +1,13 @@
+services:
+  tg_bot:
+    build: .
+    container_name: tg_bot
+    restart: unless-stopped
+
+    networks:
+      - base
+
+networks:
+  base:
+    name: base
+    external: true

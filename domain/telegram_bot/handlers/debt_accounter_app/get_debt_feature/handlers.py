@@ -28,7 +28,9 @@ async def process_first_name(message: Message, state: FSMContext) -> None:
 
 
 @get_debt_router.message(DebtForm.second_name)
-async def process_second_name(message: Message, state: FSMContext, debt_accounter: DebtAccounterPort) -> None:
+async def process_second_name(
+    message: Message, state: FSMContext, debt_accounter: DebtAccounterPort
+) -> None:
     await state.update_data(second_name=message.text)
     data = await state.get_data()
     await state.clear()
