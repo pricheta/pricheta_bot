@@ -8,8 +8,8 @@ from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 
-from domain.telegram_bot.config import BotConfig
-from domain.telegram_bot.deps import (
+from apps.telegram_bot.config import BotConfig
+from apps.telegram_bot.deps import (
     get_debt_accounter,
     get_debt_accounter_session,
     get_asker,

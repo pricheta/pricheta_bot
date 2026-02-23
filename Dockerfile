@@ -9,9 +9,10 @@ COPY pyproject.toml uv.lock ./
 RUN uv sync
 
 COPY .env .env
+COPY apps apps
 COPY adapters adapters
 COPY domain domain
 
 EXPOSE 8000
 
-CMD ["uv", "run", "-m", "domain.telegram_bot.bot"]
+CMD ["uv", "run", "-m", "apps.telegram_bot.bot"]
