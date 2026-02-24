@@ -33,16 +33,14 @@ START_KEYBOARD = ReplyKeyboardMarkup(
 )
 
 
-TRANSFER_TEXT = '📋 Зафиксировать перевод'
-GET_DEBT_TEXT = '📋 Узнать долг'
-GET_TRANSFER_HISTORY_TEXT = '📋 Получить историю переводов'
+TRANSFER_TEXT = 'Зафиксировать перевод'
+GET_DEBT_TEXT = 'Узнать долг'
+GET_TRANSFER_HISTORY_TEXT = 'Получить историю переводов'
 DEBT_ACCOUNTER_KEYBOARD = ReplyKeyboardMarkup(
     keyboard=[
-        [
-            KeyboardButton(text=GET_DEBT_TEXT),
-            KeyboardButton(text=TRANSFER_TEXT),
-            KeyboardButton(text=GET_TRANSFER_HISTORY_TEXT),
-        ],
+        [KeyboardButton(text=GET_DEBT_TEXT)],
+        [KeyboardButton(text=TRANSFER_TEXT)],
+        [KeyboardButton(text=GET_TRANSFER_HISTORY_TEXT)],
     ],
     resize_keyboard=True,
 )
