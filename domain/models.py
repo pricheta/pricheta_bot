@@ -28,7 +28,7 @@ class MoneyTransfer(BaseModel):
     @staticmethod
     def history_str(transfers: list['MoneyTransfer']) -> str:
         str_transfers = map(str, transfers)
-        return '\n'.join(str_transfers)
+        return '\n\n'.join(str_transfers)
 
 
 class Debt(BaseModel):
