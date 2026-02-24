@@ -120,5 +120,5 @@ async def get_transfer_history(
         first_person, second_person, int(lookback_days)
     )
 
-    msg = MoneyTransfer.history_str(history)
+    msg = MoneyTransfer.history_str(history) or 'Истории переводов нет'
     await message.answer(msg, reply_markup=REMOVE_KEYBOARD)
