@@ -14,7 +14,7 @@ from domain.telegram_bot.handlers.keyboards import (
     ROMA_AND_VLADA_KEYBOARD,
     TRANSFER_TEXT,
     GET_TRANSFER_HISTORY_TEXT,
-    REMOVE_KEYBOARD,
+    REMOVE_KEYBOARD, VLADA_NAME, ROMA_NAME,
 )
 
 debt_accounter_router = Router()
@@ -28,21 +28,9 @@ async def open_debt_menu(message: Message) -> None:
 
 @debt_accounter_router.message(F.text == GET_DEBT_TEXT)
 async def get_debt(
-    message: Message, asker: AskerPort, debt_accounter: DebtAccounterPort
+    message: Message, debt_accounter: DebtAccounterPort
 ) -> None:
-    ask_text = 'Введите первое имя:'
-    first_person = await asker.ask(ask_text, message, [], ROMA_AND_VLADA_KEYBOARD)
-    if not first_person:
-        return
-
-    ask_text = 'Введите второе имя (не может совпадать с первым):'
-    second_person = await asker.ask(
-        ask_text, message, [lambda x: x != first_person], ROMA_AND_VLADA_KEYBOARD
-    )
-    if not second_person:
-        return
-
-    debt = await debt_accounter.get_debt(first_person, second_person)
+    debt = await debt_accounter.get_debt(ROMA_NAME, VLADA_NAME)
     await message.answer(str(debt), reply_markup=REMOVE_KEYBOARD)
 
 
@@ -51,16 +39,11 @@ async def transfer(
     message: Message, asker: AskerPort, debt_accounter: DebtAccounterPort
 ) -> None:
     ask_text = 'Введите отправителя:'
-    sender = await asker.ask(ask_text, message, [], ROMA_AND_VLADA_KEYBOARD)
+    sender = await asker.ask(ask_text, message, [lambda x: x in (ROMA_NAME, VLADA_NAME)], ROMA_AND_VLADA_KEYBOARD)
     if not sender:
         return
 
-    ask_text = 'Введите получателя (не может совпадать с отправителем):'
-    recipient = await asker.ask(
-        ask_text, message, [lambda x: x != sender], ROMA_AND_VLADA_KEYBOARD
-    )
-    if not recipient:
-        return
+    recipient = ROMA_NAME if sender == VLADA_NAME else VLADA_NAME
 
     ask_text = 'Введите сумму перевода:'
     amount = await asker.ask(ask_text, message, [int, lambda x: int(x) > 0])
@@ -94,18 +77,6 @@ async def transfer(
 async def get_transfer_history(
     message: Message, asker: AskerPort, debt_accounter: DebtAccounterPort
 ) -> None:
-    ask_text = 'Введите первое имя:'
-    first_person = await asker.ask(ask_text, message, [], ROMA_AND_VLADA_KEYBOARD)
-    if not first_person:
-        return
-
-    ask_text = 'Введите второе имя (не может совпадать с первым):'
-    second_person = await asker.ask(
-        ask_text, message, [lambda x: x != first_person], ROMA_AND_VLADA_KEYBOARD
-    )
-    if not second_person:
-        return
-
     ask_text = f'Введите глубину истории в днях (по умолчанию {config.GET_TRANSFER_HISTORY_DEFAULT_LOOKBACK}):'
     lookback_days = await asker.ask(
         ask_text,
@@ -117,7 +88,7 @@ async def get_transfer_history(
         return
 
     history = await debt_accounter.get_transfer_history(
-        first_person, second_person, int(lookback_days)
+        ROMA_NAME, VLADA_NAME, int(lookback_days)
     )
 
     msg = MoneyTransfer.history_str(history) or 'Истории переводов нет'
