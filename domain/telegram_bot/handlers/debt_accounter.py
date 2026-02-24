@@ -14,7 +14,9 @@ from domain.telegram_bot.handlers.keyboards import (
     ROMA_AND_VLADA_KEYBOARD,
     TRANSFER_TEXT,
     GET_TRANSFER_HISTORY_TEXT,
-    REMOVE_KEYBOARD, VLADA_NAME, ROMA_NAME,
+    REMOVE_KEYBOARD,
+    VLADA_NAME,
+    ROMA_NAME,
 )
 
 debt_accounter_router = Router()
@@ -27,9 +29,7 @@ async def open_debt_menu(message: Message) -> None:
 
 
 @debt_accounter_router.message(F.text == GET_DEBT_TEXT)
-async def get_debt(
-    message: Message, debt_accounter: DebtAccounterPort
-) -> None:
+async def get_debt(message: Message, debt_accounter: DebtAccounterPort) -> None:
     debt = await debt_accounter.get_debt(ROMA_NAME, VLADA_NAME)
     await message.answer(str(debt), reply_markup=REMOVE_KEYBOARD)
 
@@ -39,7 +39,12 @@ async def transfer(
     message: Message, asker: AskerPort, debt_accounter: DebtAccounterPort
 ) -> None:
     ask_text = 'Введите отправителя:'
-    sender = await asker.ask(ask_text, message, [lambda x: x in (ROMA_NAME, VLADA_NAME)], ROMA_AND_VLADA_KEYBOARD)
+    sender = await asker.ask(
+        ask_text,
+        message,
+        [lambda x: x in (ROMA_NAME, VLADA_NAME)],
+        ROMA_AND_VLADA_KEYBOARD,
+    )
     if not sender:
         return
 
