@@ -21,7 +21,6 @@ class AskerPort(Protocol):
     def run_validators(str_: str, validators: Iterable[validator]) -> bool:
         for validator in validators:
             try:
-                print(f'{validator=}, {str_=}')
                 result = validator(str_)
             except:
                 return False

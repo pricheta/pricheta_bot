@@ -86,7 +86,7 @@ async def transfer(
         f'{debt}\n\n'
         f'Зафиксировал перевод: @{message.from_user.username}'
     )
-    # await message.bot.send_message(-4732298768, msg)
+    await message.bot.send_message(-4732298768, msg)
     await message.answer(msg, reply_markup=REMOVE_KEYBOARD)
 
 
