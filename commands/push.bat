@@ -1,3 +1,4 @@
+@echo off
 set IMAGE_NAME=prichetaboss/pricheta_bot:latest
 
 docker login
