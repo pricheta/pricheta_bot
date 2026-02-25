@@ -1,4 +1,3 @@
-@echo off
 set CODE=domain adapters apps
 
 cls

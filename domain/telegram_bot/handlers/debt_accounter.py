@@ -74,8 +74,9 @@ async def transfer(
         f'{debt}\n\n'
         f'Зафиксировал перевод: @{message.from_user.username}'
     )
-    await message.bot.send_message(-4732298768, msg)
     await message.answer(msg, reply_markup=REMOVE_KEYBOARD)
+    if config.COMMON_CHANNEL:
+        await message.bot.send_message(-4732298768, msg)
 
 
 @debt_accounter_router.message(F.text == GET_TRANSFER_HISTORY_TEXT)

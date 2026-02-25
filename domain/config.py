@@ -7,6 +7,7 @@ class BotConfig(BaseSettings):
     TOKEN: str
     USER_ANSWER_TIMEOUT: int
     GET_TRANSFER_HISTORY_DEFAULT_LOOKBACK: int
+    COMMON_CHANNEL: bool
 
 
 config = BotConfig()
