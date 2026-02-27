@@ -6,24 +6,31 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "aiogram>=3.25.0",
-    "aiogram-input>=3.1.0",
-    "aiohttp>=3.13.3",
+    "aiogram-dialog>=2.5.0",
     "pydantic>=2.12.5",
     "pydantic-settings>=2.13.1",
     "pytest>=9.0.2",
     "pytest-coverage>=0.0",
     "python-dotenv>=1.2.1",
+    "requests>=2.32.5",
     "ruff>=0.15.2",
 ]
+
+[tool.ruff]
+line-length = 88
 
 [tool.ruff.format]
 quote-style = "single"
 
 [tool.ruff.lint]
+unfixable = []
 select = [
+    "I",       # Сортировка импортов
     "ANN201",  # Публичные функции
     "ANN202",  # Приватные функции
     "ANN204",  # Специальные методы (__init__ и др.)
     "ANN205",  # Статические методы
     "ANN206",  # Методы класса
+    "F401",    # Лишние импорты,
+    "F841",    # Лишние переменные
 ]

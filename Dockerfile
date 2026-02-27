@@ -15,4 +15,4 @@ COPY domain domain
 
 EXPOSE 8000
 
-CMD ["uv", "run", "-m", "apps.telegram_bot.bot"]
+CMD ["uv", "run", "-m", "apps.pricheta_bot.bot"]

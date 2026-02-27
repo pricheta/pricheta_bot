@@ -1,13 +1,13 @@
 from typing import Protocol
 
-from domain.models import MoneyTransfer, Debt
+from domain.models import Debt, MoneyTransfer
 
 
 class DebtAccounterPort(Protocol):
-    async def insert_transfer(self, transfer: MoneyTransfer) -> None: ...
+    def insert_transfer(self, transfer: MoneyTransfer) -> None: ...
 
-    async def get_transfer_history(
+    def get_transfer_history(
         self, first_person: str, second_person: str, lookback_days: int
     ) -> list[MoneyTransfer]: ...
 
-    async def get_debt(self, first_person: str, second_person: str) -> Debt: ...
+    def get_debt(self, first_person: str, second_person: str) -> Debt: ...

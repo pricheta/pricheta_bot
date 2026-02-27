@@ -11,14 +11,10 @@ class MoneyTransfer(BaseModel):
     created_at: datetime | None = None
 
     def __str__(self) -> str:
-        str_ = ''
+        str_ = f'Отправитель: {self.sender}\nПолучатель: {self.recipient}\nСумма: {self.amount} ₽'
 
         if self.created_at:
-            str_ += f'{self.created_at.astimezone(ZoneInfo("Europe/Moscow")).strftime(format="%d.%m %H:%M")} | '
-
-        str_ += (
-            f'Отправитель {self.sender} | Получатель {self.recipient} | {self.amount} ₽'
-        )
+            str_ += f'\nВремя: {self.created_at.astimezone(ZoneInfo("Europe/Moscow")).strftime(format="%d.%m %H:%M")}'
 
         return str_
 
@@ -38,9 +34,9 @@ class Debt(BaseModel):
 
     def __str__(self) -> str:
         if not self.amount:
-            return f'{self.debtor} | {self.creditor} | {self.amount} ₽'
+            return 'Долг отсутствует'
 
-        return f'Заемщик {self.debtor} | Должник {self.creditor} | {self.amount} ₽'
+        return f'Заемщик {self.debtor}\nДолжник {self.creditor}\n{self.amount} ₽'
 
     def __repr__(self) -> str:
         return self.__str__()
